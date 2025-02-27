@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 // import svg images and icons
-import backgroundImg from "../../assets/images/Log-In.svg";
 import Logo from "../../assets/images/Eventeev-logo.svg";
 import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router-dom";
@@ -25,20 +24,22 @@ import {
   Input,
   Flex,
   Checkbox,
+  InputRightElement,
+  InputGroup,
 } from "@chakra-ui/react";
 
 const SignIn = () => {
-  const [clientData, setClientData] = useState({
-    email: "",
-    password: "",
-  });
-
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   // password visibility state
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const handlePasswordVisibility = () => {
+    setIsPasswordVisible(!isPasswordVisible);
+  };
 
   return (
     <div className={`log-in-bg bg-cover bg-center`}>
-      <Center flexDirection={"column"} paddingY={"10"} className="space-y-6">
+      <Center flexDirection={"column"} paddingY={"20"} className="space-y-6">
         <Box>
           <Image src={Logo} alt="Eventeev 2025" />
         </Box>
@@ -90,7 +91,10 @@ const SignIn = () => {
               <Input
                 type="email"
                 size={"lg"}
-                value={clientData.email}
+                fontSize={"sm"}
+                color={"blackAlpha.800"}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 focusBorderColor="orange.300"
               />
             </FormControl>
@@ -98,12 +102,29 @@ const SignIn = () => {
               <FormLabel fontSize={"sm"} fontWeight={"medium"}>
                 Password
               </FormLabel>
-              <Input
-                type={isPasswordVisible ? "text" : "password "}
-                size={"lg"}
-                value={clientData.password}
-                focusBorderColor="orange.300"
-              />
+              <InputGroup>
+                <Input
+                  type={isPasswordVisible ? "text" : "password"}
+                  size={"lg"}
+                  fontSize={"sm"}
+                  color={"blackAlpha.800"}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  focusBorderColor="orange.300"
+                />
+                <InputRightElement height={"full"} marginX={"2.5"}>
+                  <Button
+                    h="1.75rem"
+                    size="sm"
+                    variant={"unstyled"}
+                    display={"flex"}
+                    justifyContent={"center"}
+                    onClick={() => handlePasswordVisibility()}
+                  >
+                    {isPasswordVisible ? <VscEye className="text-lg"/> : <VscEyeClosed className="text-lg"/>}
+                  </Button>
+                </InputRightElement>
+              </InputGroup>
             </FormControl>
             <Flex
               justifyContent={"space-between"}
