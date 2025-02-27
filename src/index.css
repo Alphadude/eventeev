@@ -1,1 +1,7 @@
 @import "tailwindcss";
+
+.log-in-bg {
+    background-image: url("https://res.cloudinary.com/dygn4o3nv/image/upload/v1740694422/Log-In_jwspvw.png");
+    background-size: cover;
+    background-position: center;
+}
